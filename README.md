@@ -1,6 +1,6 @@
 # Utils 328
 
-This library provides bare bone utilies to use some key features on the ATmega328P.
+This library provides a set of bare bone utilities to use some key features on the ATmega328P.
 
 **These libraries are specific to the ATmega328P, and must be modified for use on other processors.**
 
