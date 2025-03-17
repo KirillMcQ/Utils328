@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.embeddedhtml": "html",
+    "*.css": "css",
+    "serial328.h": "c"
+  }
+}
