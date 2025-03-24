@@ -2,6 +2,7 @@
   "files.associations": {
     "*.embeddedhtml": "html",
     "*.css": "css",
-    "serial328.h": "c"
+    "serial328.h": "c",
+    "delay328.h": "c"
   }
 }
