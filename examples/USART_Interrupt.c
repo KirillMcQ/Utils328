@@ -24,7 +24,7 @@ int main(void)
   return 0;
 }
 
-// Blink the LED whenever there was a successful USART TX
+// Toggle the LED when there was a successful USART TX
 ISR(USART_TX_vect)
 {
   PINB |= (1 << PINB5); // Toggle LED
