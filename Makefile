@@ -1,30 +1,9 @@
-MCU = atmega328p
-F_CPU = 16000000UL
+main.elf: main.c
+	avr-gcc -mmcu=atmega328p -DF_CPU=16000000UL -Os -o main.elf main.c Serial328.c Delay328.c
 
-CC = avr-gcc
-OBJCOPY = avr-objcopy
-AVRDUDE = avrdude
+main.hex: main.elf
+	avr-objcopy -O ihex main.elf main.hex
 
-CFLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU) -Os
-LDFLAGS = -mmcu=$(MCU)
-
-SRC = main.c
-OBJ = main.elf
-HEX = main.hex
-
-CUSTOMHEADERSERIALC = Serial328.c
-CUSTOMHEADERDELAYC = Delay328.c
-
-PORT = /dev/cu.usbserial-AB0ONQRK
-BAUD = 115200
-PROGRAMMER = arduino
-
-$(OBJ): $(SRC)
-	$(CC) $(CFLAGS) -o $(OBJ) $(SRC) $(CUSTOMHEADERSERIALC) ${CUSTOMHEADERDELAYC}
-
-$(HEX): $(OBJ)
-	$(OBJCOPY) -O ihex $(OBJ) $(HEX)
-
-flash: $(HEX)
-	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -P $(PORT) -b $(BAUD) -U flash:w:$(HEX):i
-	rm -f $(OBJ) $(HEX)
+flash: main.hex
+	avrdude -c arduino -p atmega328p -P /dev/cu.usbserial-AB0ONQRK -b 115200 -U flash:w:main.hex:i
+	rm -f main.elf main.hex
